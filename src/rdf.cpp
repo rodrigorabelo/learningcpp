@@ -1,6 +1,6 @@
 //============================================================================
 // Name        : rdf.cpp
-// Author      : 
+// Author      :
 // Version     :
 // Copyright   : Your copyright notice
 // Description : Hello World in C++, Ansi-style
@@ -14,7 +14,6 @@
 using namespace std;
 
 
-
 float multi(float a, float b){
 	float multip = 0;
 	multip = a*b;
@@ -25,14 +24,9 @@ float div(float a, float b){
 	return a / b;
 }
 
-float soma(float a, float b){
-	return a + b;
-}
-
 float sub(float a, float b){
 	return a - b;
 }
-
 
 
 
@@ -40,67 +34,87 @@ int main() {
 
 
 	float a, b, results;
-	char operador;
+	char op;
 	char d;
-	bool c;
-	a = 0.0;
-	b = 0.0;
-	results = 0.0;
-	operador = 'x';
-	d = 'z';
-	c = false;
+
+	a = b = results = 0.0;
+	op = d = 'x';
 
 
 	do {
 
-	system("cls");
+		system("clear");
 
-	cout <<"Insira o primeiro valor."<< endl;
-		cin >> a;
-
-
-	cout <<"Insira o tipo de operação ( *, /, +, -)." << endl;
-		cin >> operador;
-
-		if (operador != '*' && operador != '/' && operador != '+' && operador != '-'){
-			do {
-			cout << endl << "Operador inválido. Por favor inserir apenas '*' para multiplicação, '/' para divisão, '+' para soma e '-' para subtração" <<endl;
-			cin >> operador;
-			} while (operador != '*' && operador != '/' && operador != '+' && operador != '-');
+		cout <<"Insira o primeiro valor."<< endl;
+			cin >> a;
+		if (cin.fail()){
+		    cin.clear();
+		    cin.ignore(100,'\n'); // it will ignore 100 characters or get to the end of the line.
+		    cout <<"Não são permitidas inserções não numéricas. Favor inserir um valor válido"<< endl;
+		    			cin >> a;
 		}
 
 
-	cout <<"Insira o segundo valor." << endl;
-		cin >> b;
+		cout <<"Insira o tipo de operação (*, /, +, -)." << endl;
+			cin >> op;
 
 
-	if (operador == '*')
-		results = multi(a,b);
+		if (op != '*' && op != '/' && op != '+' && op != '-'){
 
-		else if
-			(operador == '/')	results = div(a,b);
+			do {
 
-		else if
-			(operador == '+')	results = soma(a,b);
+				cout << endl <<"Operadores válidos:" << endl << endl;
+				cout <<"	'+' para adição." << endl;
+				cout <<"	'-' para subtração." << endl;
+				cout <<"	'*' para multiplicação." << endl;
+				cout <<"	'/' para divisão."<< endl;
+				cin >> op;
 
-		else
-			results = sub(a,b);
+			} while (op != '*' && op != '/' && op != '+' && op != '-');
+		}
 
 
+		cout <<"Insira o segundo valor." << endl;
+			cin >> b;
+		if (cin.fail()){
+			cin.clear();
+		    cin.ignore(100,'\n'); // it will ignore 100 characters or get to the end of the line.
+			cout <<"Não são permitidas inserções não numéricas. Favor inserir um valor válido"<< endl;
+				cin >> a;
+			}
 
-	cout << "Resultado: " << results << endl << endl;
 
-	cout <<"Se desejar realizar outra operação, insira 'S', caso contrário insira qualquer outra tecla."<< endl;
-	cin >> d;
-	if (d == 'S')
-		c = true;
+		if (op == '*')
+			results = multi(a,b);
 
-	else
-		c = false;
+			else if (op == '/')
+				results = div(a,b);
 
-	cout << endl;
+			else if (op == '+')
+				results = a+b;
 
-} while (c == true);
+			else
+				results = sub(a,b);
+
+
+		cout << "Resultado: " << results << endl << endl;
+
+		cout <<"'S' para realizar outra operação. Caso contrário insira qualquer outra tecla."<< endl;
+			cin >> d;
+
+		cout << endl;
+
+
+	} while (d == 'S' || d == 's');
+
+	system("clear");
+
+	cout << endl << setw(30) << "Há braços" << endl <<endl;
+
+	sleep(2);
+
+	system("clear");
+
 
 	return 0;
 }
